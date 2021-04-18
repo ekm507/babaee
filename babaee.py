@@ -1,4 +1,4 @@
-from config import bot_token, forward_chat_id, admins_chat_id_list
+from config import bot_token, admins_chat_id_list
 
 import requests
 from pprint import pprint
