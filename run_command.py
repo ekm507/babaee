@@ -4,6 +4,11 @@ import json
 from config import bot_token
 
 
+def escape_ansi(line):
+    ansi_escape =re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
+    return ansi_escape.sub('', line)
+    
+
 def run_command(command, updates):
 
     chat_id = updates.json()['result'][0]['message']['chat']['id']
@@ -13,10 +18,11 @@ def run_command(command, updates):
 
     try:
         out = subprocess.check_output(command.split(' '))
+        printable_out_text = escape_ansi(str(out, encoding='utf-8'))
 
         message = {
             "chat_id":chat_id,
-            "text":'```\n' + str(out, encoding='utf-8') + '\n```',
+            "text":'```\n' + printable_out_text + '\n```',
             "parse_mode":"MarkdownV2",
         }
 
