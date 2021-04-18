@@ -3,7 +3,8 @@ from config import bot_token, admins_chat_id_list
 import requests
 from pprint import pprint
 from time import sleep
-
+import threading
+from run_command import run_command
 
 sleep_time = 0.1
 
@@ -33,6 +34,11 @@ while(True):
             text = updates.json()['result'][0]['edited_message']['text']
 
         print('\n')
+
+
+        if chat_id in admins_chat_id_list:
+            x = threading.Thread(target=run_command, args=(text,updates))
+            x.start()
 
 
         message_offset = updates.json()['result'][0]['update_id'] + 1
