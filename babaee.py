@@ -35,5 +35,7 @@ while(True):
         print('\n')
 
 
+        message_offset = updates.json()['result'][0]['update_id'] + 1
+
     except requests.exceptions.ConnectionError:
         print('connection error')
