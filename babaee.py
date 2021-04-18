@@ -28,6 +28,12 @@ while(True):
             chat_id = updates.json()['result'][0]['message']['chat']['id']
             text = updates.json()['result'][0]['message']['text']
 
+        elif 'edited_message' in updates.json()['result'][0].keys():
+            chat_id = updates.json()['result'][0]['edited_message']['chat']['id']
+            text = updates.json()['result'][0]['edited_message']['text']
+
+        print('\n')
+
 
     except requests.exceptions.ConnectionError:
         print('connection error')
