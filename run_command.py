@@ -2,7 +2,7 @@ import subprocess
 import requests
 import json
 from config import bot_token
-
+import re
 
 def escape_ansi(line):
     ansi_escape =re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
