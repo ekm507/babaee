@@ -7,7 +7,7 @@ from config import bot_token
 def run_command(command, updates):
 
     chat_id = updates.json()['result'][0]['message']['chat']['id']
-    text = updates.json()['result'][0]['message']['text']
+    # text = updates.json()['result'][0]['message']['text']
 
 
 
