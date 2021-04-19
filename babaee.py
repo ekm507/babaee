@@ -42,6 +42,10 @@ while(True):
 
 
         message_offset = updates.json()['result'][0]['update_id'] + 1
+    
+    # usually means message is in a type that is not supported in babaee (yet).
+    except KeyError:
+        message_offset = updates.json()['result'][0]['update_id'] + 1
 
     except requests.exceptions.ConnectionError:
         print('connection error')
