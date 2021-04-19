@@ -1,4 +1,5 @@
 import subprocess
+import special_commands
 import requests
 import json
 from config import bot_token
@@ -17,7 +18,13 @@ def run_command(command, updates):
 
 
     try:
-        out = subprocess.check_output(command.split(' '))
+        special_keyword = command.split(' ')[0]
+        if special_keyword in special_commands.special_commands:
+            cmd = ' '.join(command.split(' ')[1:])
+            out = special_commands.special_commands[special_keyword](cmd)
+        else:
+            out = subprocess.check_output(command.split(' '))
+
         printable_out_text = escape_ansi(str(out, encoding='utf-8'))
 
         message = {
