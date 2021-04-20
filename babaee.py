@@ -47,6 +47,10 @@ while(True):
             chat_id = updates.json()['result'][0]['edited_message']['chat']['id']
             # get message text
             text = updates.json()['result'][0]['edited_message']['text']
+        
+        else:
+            message_offset = updates.json()['result'][0]['update_id'] + 1
+            continue
 
         # command is parsed only if message is sent from an admin
         if chat_id in admins_chat_id_list:
