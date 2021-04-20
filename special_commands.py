@@ -1,7 +1,7 @@
 import subprocess
 
 # run command using sh shell
-def __run_sh__(command):
+def __run_sh__(command : str):
     # run command using sh shell
     return subprocess.check_output(command, shell=True)
 
