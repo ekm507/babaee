@@ -48,8 +48,11 @@ while(True):
             # get message text
             text = updates.json()['result'][0]['edited_message']['text']
         
+        # if there is not any key of the specified ones
         else:
+            # mark message as read
             message_offset = updates.json()['result'][0]['update_id'] + 1
+            # do nothing and just reloop it
             continue
 
         # command is parsed only if message is sent from an admin
