@@ -34,8 +34,16 @@ def run_command(command, updates):
         else:
             # run the command using subprocess and get output
             out = subprocess.check_output(command.split(' '))
+
         # remove ansi escape codes from command output
-        printable_out_text = escape_ansi(str(out, encoding='utf-8'))
+        # if out is str
+        if isinstance(out, str):
+            # just remove ansi escape characters
+            printable_out_text = escape_ansi(out)
+        # if it is not str 
+        else:
+            # first encode it into str, then remove ansi escape characters
+            printable_out_text = escape_ansi(str(out, encoding='utf-8'))
 
         # make a message to send to telegram
         message = {
