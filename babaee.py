@@ -1,5 +1,5 @@
 # import bot configurations
-from config import bot_token, admins_chat_id_list
+from config import bot_token, admins_chat_id_list, forward_chat_id_list
 from run_command import run_command
 import requests
 from pprint import pprint
@@ -41,6 +41,32 @@ while(True):
             # note: if message is not text type, error handling will catch it and continue the loop
             text = updates.json()['result'][0]['message']['text']
 
+            # forward incomming message to specified chats.
+            for forward_chat_id in forward_chat_id_list:
+
+                # do not forward to themselves!
+                if chat_id != int(forward_chat_id):
+
+                    # forwarding message
+                    forward_message = {
+                        "chat_id":forward_chat_id,
+                        "from_chat_id":updates.json()['result'][0]['message']['chat']['id'],
+                        "message_id":updates.json()['result'][0]['message']['message_id'],
+                    }
+
+                    # send user identity
+                    message = {
+                        "chat_id":forward_chat_id,
+                        "text": 'somebody(👇🏻) sent me a message(👆🏿)\n\n' + updates.json()['result'][0]['message']['chat'].__repr__(),
+                    }
+
+                    # forward message
+                    requests.post(f'https://api.telegram.org/bot{bot_token}/forwardMessage', data=forward_message)
+                    # send user identity
+                    requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+
+
+
         # if there is a new "edited message"
         elif 'edited_message' in updates.json()['result'][0].keys():
             # get message chat_id
@@ -54,6 +80,7 @@ while(True):
             message_offset = updates.json()['result'][0]['update_id'] + 1
             # do nothing and just reloop it
             continue
+
 
         # command is parsed only if message is sent from an admin
         if chat_id in admins_chat_id_list:
