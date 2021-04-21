@@ -14,7 +14,7 @@ python3 babaee.py
 ## TODO
 
 - let user to append into file using `/edit` command.
-- show a list of running subprocesses with a killing ability
+- show a list of running subprocesses with a killing ability. (temporary solution: linux ps command)
 - make an interface for other apps to let them communicatie with admin via telegram.
 - make better logs.
-- send files.
+- send files. (sending files from server on telegram is possible now. opposite is not.)
