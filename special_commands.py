@@ -9,10 +9,24 @@ def __run_sh__(command : str, chat_id):
 
 # print a text into a file
 def __edit_file__(command : str, chat_id):
+
+    # first line of command is args line
+    args = list(filter(('').__ne__, command.split('\n')[0].split(' ')))
+
+    # if there is a -a switch in args, it means that file should be appended.
+    if '-a' in args:
+        write_mode = 'a'
+    else:
+        write_mode = 'w'
+    
     # get filename. first word in the message should be the filename
-    fileName = command.split(' ')[0].split('\n')[0]
-    # if we remove first work from the message, remaining will be text body of file
-    text = command[len(fileName)+1:]
+    for arg in args:
+        if arg not in ['-a']:
+            fileName = arg
+            break
+
+    # if we remove first line from the message, remaining will be text body of file
+    text = command[len(command.split('\n')[0])+1:]
 
     # if text is empty, do nothing. (there is some reason for now)
     if len(text) < 1:
@@ -21,7 +35,7 @@ def __edit_file__(command : str, chat_id):
     # try to open a file and write text into
     try:
         # open the file
-        with open(fileName, 'w') as fileToEdit:
+        with open(fileName, write_mode) as fileToEdit:
             # write text into file
             fileToEdit.write(text)
         # return a proper success message.
