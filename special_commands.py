@@ -69,11 +69,19 @@ def __print_help_message__(command, chat_id):
     return ''
 
 
+# todo. this is just a temporary solution!!!
+def __show_process_list__(command, chat_id):
+    text = subprocess.check_output('ps')
+    return text
+
+
 # a dict of special commands mapped to corresponding function
 special_commands = {
     '/sh':__run_sh__,
     '/edit':__edit_file__,
     '/send':__send_file__,
     '/help': __print_help_message__,
+    '/ps': __show_process_list__,
+
 }
 
