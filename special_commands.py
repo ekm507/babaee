@@ -1,12 +1,12 @@
 import subprocess
 
 # run command using sh shell
-def __run_sh__(command : str):
+def __run_sh__(command : str, chat_id):
     # run command using sh shell
     return subprocess.check_output(command, shell=True)
 
 # print a text into a file
-def __edit_file__(command : str):
+def __edit_file__(command : str, chat_id):
     # get filename. first word in the message should be the filename
     fileName = command.split(' ')[0].split('\n')[0]
     # if we remove first work from the message, remaining will be text body of file

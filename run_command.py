@@ -29,7 +29,7 @@ def run_command(command, updates):
             # remove first word from the command text
             cmd = ' '.join(command.split(' ')[1:])
             # run special function for the command and get output
-            out = special_commands.special_commands[special_keyword](cmd)
+            out = special_commands.special_commands[special_keyword](cmd, chat_id)
         # if command is not one of the specials
         else:
             # run the command using subprocess and get output
