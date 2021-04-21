@@ -17,3 +17,4 @@ python3 babaee.py
 - show a list of running subprocesses with a killing ability
 - make an interface for other apps to let them communicatie with admin via telegram.
 - make better logs.
+- send files.
