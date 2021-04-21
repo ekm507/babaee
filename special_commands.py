@@ -32,17 +32,24 @@ def __edit_file__(command : str, chat_id):
         return 'Error: there was an error editing file'
 
 
+# send a file to telegram chat
 def __send_file__(command:str, chat_id):
+
+    # get filename
     filename = command
-    # print(filename)
+
+    # data part of request
     message = {
         "chat_id":chat_id,
     }
 
+    # file part of request
     files = {
+        # open file and put it in files part of request
         "document":open(filename, 'rb'),
     }
 
+    # send file into telegram
     requests.post(f'https://api.telegram.org/bot{bot_token}/sendDocument', data=message, files=files)
     return ''
 
