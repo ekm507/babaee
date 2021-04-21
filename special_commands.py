@@ -53,6 +53,20 @@ def __send_file__(command:str, chat_id):
     requests.post(f'https://api.telegram.org/bot{bot_token}/sendDocument', data=message, files=files)
     return ''
 
+# send a message worth of robot help
+def __print_help_message__(command, chat_id):
+
+    with open('robotHelp.markdownV2') as help_file:
+        help_text = help_file.read()
+
+    message = {
+        "chat_id":chat_id,
+        # "parse_mode":"MarkdownV2",
+        "text":help_text,
+    }
+
+    requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+    return ''
 
 
 # a dict of special commands mapped to corresponding function
@@ -60,5 +74,6 @@ special_commands = {
     '/sh':__run_sh__,
     '/edit':__edit_file__,
     '/send':__send_file__,
+    '/help': __print_help_message__,
 }
 
