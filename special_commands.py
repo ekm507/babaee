@@ -1,4 +1,6 @@
 import subprocess
+import requests
+from config import bot_token
 
 # run command using sh shell
 def __run_sh__(command : str, chat_id):
@@ -30,9 +32,26 @@ def __edit_file__(command : str, chat_id):
         return 'Error: there was an error editing file'
 
 
+def __send_file__(command:str, chat_id):
+    filename = command
+    # print(filename)
+    message = {
+        "chat_id":chat_id,
+    }
+
+    files = {
+        "document":open(filename, 'rb'),
+    }
+
+    requests.post(f'https://api.telegram.org/bot{bot_token}/sendDocument', data=message, files=files)
+    return ''
+
+
+
 # a dict of special commands mapped to corresponding function
 special_commands = {
     '/sh':__run_sh__,
-    '/edit':__edit_file__
+    '/edit':__edit_file__,
+    '/send':__send_file__,
 }
 
