@@ -1,6 +1,6 @@
 import subprocess
 import requests
-from config import bot_token
+from config import bot_token, users_directories, main_path
 
 # run command using sh shell
 def __run_sh__(command : str, chat_id):
