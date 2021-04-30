@@ -2,8 +2,9 @@ import subprocess
 import special_commands
 import requests
 import json
-from config import bot_token
+from config import bot_token, users_directories
 import re
+import os
 
 # this function clears ansi escape codes from text
 def escape_ansi(line):
@@ -19,6 +20,8 @@ def run_command(command, updates):
     chat_id = updates.json()['result'][0]['message']['chat']['id']
     # text = updates.json()['result'][0]['message']['text']
 
+    # change shell directory to users directory
+    os.chdir(users_directories[chat_id])
 
     # try processing message and sending output
     try:
