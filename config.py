@@ -1,3 +1,5 @@
+import os
+
 # paste bot token here
 bot_token = "" # "something:something"
 
@@ -10,3 +12,6 @@ admins_chat_id_list = [
 forward_chat_id_list = [
      # integers
 ]
+
+# first path where program runs
+main_path = os.path.realpath('.')
