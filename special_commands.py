@@ -70,6 +70,9 @@ def __send_file__(command:str, chat_id):
 # send a message worth of robot help
 def __print_help_message__(command, chat_id):
 
+    # go to directory where help file is stored
+    os.chdir(main_path)
+
     with open('robotHelp.markdownV2') as help_file:
         help_text = help_file.read()
 
