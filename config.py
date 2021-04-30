@@ -16,4 +16,6 @@ forward_chat_id_list = [
 # first path where program runs
 main_path = os.path.realpath('.')
 
+# direcroty for each user will be stored in this dictionary
+# default dir is .
 users_directories = {x:os.path.realpath('.') for x in admins_chat_id_list}
