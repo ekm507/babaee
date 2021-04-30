@@ -15,3 +15,5 @@ forward_chat_id_list = [
 
 # first path where program runs
 main_path = os.path.realpath('.')
+
+users_directories = {x:os.path.realpath('.') for x in admins_chat_id_list}
