@@ -89,6 +89,34 @@ def __show_process_list__(command, chat_id):
     return text
 
 
+# cd to a directory
+def __change_user_directory__(command, chat_id):
+    # if no args are provided
+    if len(command) == 0:
+        # cd to main path
+        newpath = main_path
+    # if address is independant
+    elif command.startswith('/'):
+        # change address straightly
+        newpath = os.path.realpath(command)
+    # if address is relative
+    else:
+        # change address relative to the current path
+        newpath = os.path.realpath(users_directories[chat_id] + '/' + command)
+    
+    # if the given path exists
+    if os.path.exists(newpath):
+        # change user directory to the path
+        users_directories[chat_id] = newpath
+    # if path does not exist
+    else:
+        # do not change directory. return error message.
+        return 'Error path does not exist'
+    
+    # if it was susccessful, return current path
+    return users_directories[chat_id]
+
+
 # a dict of special commands mapped to corresponding function
 special_commands = {
     '/sh':__run_sh__,
@@ -96,6 +124,7 @@ special_commands = {
     '/send':__send_file__,
     '/help': __print_help_message__,
     '/ps': __show_process_list__,
+    'cd': __change_user_directory__,
 
 }
 
