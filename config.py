@@ -19,3 +19,7 @@ main_path = os.path.realpath('.')
 # direcroty for each user will be stored in this dictionary
 # default dir is .
 users_directories = {x:os.path.realpath('.') for x in admins_chat_id_list}
+
+# file containing a help for robot
+# change it to any help file you would like to be sent to user when using /help command.
+help_file_name = 'README.md'
