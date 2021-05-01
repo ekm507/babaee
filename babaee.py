@@ -36,10 +36,16 @@ while(True):
 
         # jsonified message to process
         json_message = updates.json()['result'][0]
-        
+
+        # type of message will be stored here. we will later use it for processing
+        message_type = ''
 
         # if there is a new "message"
         if 'message' in json_message.keys():
+
+            # set message type
+            message_type = 'message'
+
             # get chat id of the message
             chat_id = json_message['message']['chat']['id']
             # get message text
@@ -74,11 +80,23 @@ while(True):
 
         # if there is a new "edited message"
         elif 'edited_message' in json_message.keys():
+
+            # set message type
+            message_type = 'edited_message'
+
             # get message chat_id
             chat_id = json_message['edited_message']['chat']['id']
             # get message text
             text = json_message['edited_message']['text']
-        
+
+
+        # if message was actually a document
+        elif 'document' in json_message:
+            # set message type
+            message_type = 'document'
+            # get document info
+            document_details = json_message['document']
+
         # if there is not any key of the specified ones
         else:
             # mark message as read
