@@ -24,6 +24,7 @@ while(True):
         # get message updates
         updates = requests.post(f'https://api.telegram.org/bot{bot_token}/getupdates?offset={message_offset}&limit={message_limit}')
 
+        # pprint(updates.json())
         #  if there is no message, do nothing.
         if len(updates.json()['result']) < 1:
             # reloop it
@@ -33,13 +34,17 @@ while(True):
         for message in updates.json()['result']:
             pprint(message)
 
+        # jsonified message to process
+        json_message = updates.json()['result'][0]
+        
+
         # if there is a new "message"
-        if 'message' in updates.json()['result'][0].keys():
+        if 'message' in json_message.keys():
             # get chat id of the message
-            chat_id = updates.json()['result'][0]['message']['chat']['id']
+            chat_id = json_message['message']['chat']['id']
             # get message text
             # note: if message is not text type, error handling will catch it and continue the loop
-            text = updates.json()['result'][0]['message']['text']
+            text = json_message['message']['text']
 
             # forward incomming message to specified chats.
             for forward_chat_id in forward_chat_id_list:
@@ -50,14 +55,14 @@ while(True):
                     # forwarding message
                     forward_message = {
                         "chat_id":forward_chat_id,
-                        "from_chat_id":updates.json()['result'][0]['message']['chat']['id'],
-                        "message_id":updates.json()['result'][0]['message']['message_id'],
+                        "from_chat_id":json_message['message']['chat']['id'],
+                        "message_id":json_message['message']['message_id'],
                     }
 
                     # send user identity
                     message = {
                         "chat_id":forward_chat_id,
-                        "text": 'somebody(👇🏻) sent me a message(👆🏿)\n\n' + updates.json()['result'][0]['message']['chat'].__repr__(),
+                        "text": 'somebody(👇🏻) sent me a message(👆🏿)\n\n' + json_message['message']['chat'].__repr__(),
                     }
 
                     # forward message
@@ -68,16 +73,16 @@ while(True):
 
 
         # if there is a new "edited message"
-        elif 'edited_message' in updates.json()['result'][0].keys():
+        elif 'edited_message' in json_message.keys():
             # get message chat_id
-            chat_id = updates.json()['result'][0]['edited_message']['chat']['id']
+            chat_id = json_message['edited_message']['chat']['id']
             # get message text
-            text = updates.json()['result'][0]['edited_message']['text']
+            text = json_message['edited_message']['text']
         
         # if there is not any key of the specified ones
         else:
             # mark message as read
-            message_offset = updates.json()['result'][0]['update_id'] + 1
+            message_offset = json_message['update_id'] + 1
             # do nothing and just reloop it
             continue
 
@@ -91,12 +96,12 @@ while(True):
 
 
         # increase message offset. sending next request with this offset is like marking message as read.
-        message_offset = updates.json()['result'][0]['update_id'] + 1
+        message_offset = json_message['update_id'] + 1
     
     # usually means message is in a type that is not supported in babaee (yet).
     except KeyError:
         # just mark message as read
-        message_offset = updates.json()['result'][0]['update_id'] + 1
+        message_offset = json_message['update_id'] + 1
 
     # if there was a connection error
     except requests.exceptions.ConnectionError:
