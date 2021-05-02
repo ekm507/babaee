@@ -126,7 +126,7 @@ def __receive_file__(command, chat_id):
     
     # we have to get (file_name, file_path, chat_id) from where it was stored TODO
     
-
+    os.chdir(main_path)
     try:
         users_file_paths = pickle.load(open('users_file_paths.pickle', 'rb'))
     except FileNotFoundError:
