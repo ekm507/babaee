@@ -60,14 +60,19 @@ while(True):
 
                     # forwarding message
                     forward_message = {
+                        # chat id where message was sent
                         "chat_id":forward_chat_id,
+                        # chat id where message should be forwarded to
                         "from_chat_id":json_message['message']['chat']['id'],
+                        # id of message we are going to forward
                         "message_id":json_message['message']['message_id'],
                     }
 
                     # send user identity
                     message = {
+                        # chat id where message should be forwarded to
                         "chat_id":forward_chat_id,
+                        # a text telling user identity
                         "text": 'somebody(👇🏻) sent me a message(👆🏿)\n\n' + json_message['message']['chat'].__repr__(),
                     }
 
