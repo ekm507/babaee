@@ -92,7 +92,6 @@ def run_command(command, chat_id):
 
 
 def check_document(document, chat_id):
-    print('---')
     # make message to get more details from telegram
     message = {
         "file_id":document['file_id']
