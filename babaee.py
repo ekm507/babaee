@@ -108,7 +108,7 @@ while(True):
         # command is parsed only if message is sent from an admin
         if chat_id in admins_chat_id_list:
             # create a new thread for processing command
-            x = threading.Thread(target=run_command, args=(text,updates))
+            x = threading.Thread(target=run_command, args=(text,chat_id))
             # start the thread
             x.start()
 

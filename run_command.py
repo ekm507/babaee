@@ -14,10 +14,9 @@ def escape_ansi(line):
     return ansi_escape.sub('', line)
     
 # process commands
-def run_command(command, updates):
+def run_command(command, chat_id):
 
-    # get chat id from message
-    chat_id = updates.json()['result'][0]['message']['chat']['id']
+
     # text = updates.json()['result'][0]['message']['text']
 
     # change shell directory to users directory
