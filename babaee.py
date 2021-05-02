@@ -1,6 +1,6 @@
 # import bot configurations
 from config import bot_token, admins_chat_id_list, forward_chat_id_list
-from run_command import run_command
+from run_command import run_command, check_document
 import requests
 from pprint import pprint
 from time import sleep
@@ -31,55 +31,67 @@ while(True):
             continue
 
         # print all new messages
-        for message in updates.json()['result']:
-            pprint(message)
+        # for message in updates.json()['result']:
+        #     pprint(message)
 
         # jsonified message to process
         json_message = updates.json()['result'][0]
+        pprint(json_message)
 
         # type of message will be stored here. we will later use it for processing
         message_type = ''
 
         # if there is a new "message"
-        if 'message' in json_message.keys():
+        if 'message' in json_message:
 
-            # set message type
-            message_type = 'message'
 
             # get chat id of the message
             chat_id = json_message['message']['chat']['id']
-            # get message text
-            # note: if message is not text type, error handling will catch it and continue the loop
-            text = json_message['message']['text']
 
-            # forward incomming message to specified chats.
-            for forward_chat_id in forward_chat_id_list:
+            if 'text' in json_message['message']:
 
-                # do not forward to themselves!
-                if chat_id != int(forward_chat_id):
+                # set message type
+                message_type = 'text'
+                # get message text
+                # note: if message is not text type, error handling will catch it and continue the loop
+                text = json_message['message']['text']
 
-                    # forwarding message
-                    forward_message = {
-                        # chat id where message was sent
-                        "chat_id":forward_chat_id,
-                        # chat id where message should be forwarded to
-                        "from_chat_id":json_message['message']['chat']['id'],
-                        # id of message we are going to forward
-                        "message_id":json_message['message']['message_id'],
-                    }
+                # forward incomming message to specified chats.
+                for forward_chat_id in forward_chat_id_list:
 
-                    # send user identity
-                    message = {
-                        # chat id where message should be forwarded to
-                        "chat_id":forward_chat_id,
-                        # a text telling user identity
-                        "text": 'somebody(👇🏻) sent me a message(👆🏿)\n\n' + json_message['message']['chat'].__repr__(),
-                    }
+                    # do not forward to themselves!
+                    if chat_id != int(forward_chat_id):
 
-                    # forward message
-                    requests.post(f'https://api.telegram.org/bot{bot_token}/forwardMessage', data=forward_message)
-                    # send user identity
-                    requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+                        # forwarding message
+                        forward_message = {
+                            # chat id where message was sent
+                            "chat_id":forward_chat_id,
+                            # chat id where message should be forwarded to
+                            "from_chat_id":json_message['message']['chat']['id'],
+                            # id of message we are going to forward
+                            "message_id":json_message['message']['message_id'],
+                        }
+
+                        # send user identity
+                        message = {
+                            # chat id where message should be forwarded to
+                            "chat_id":forward_chat_id,
+                            # a text telling user identity
+                            "text": 'somebody(👇🏻) sent me a message(👆🏿)\n\n' + json_message['message']['chat'].__repr__(),
+                        }
+
+                        # forward message
+                        requests.post(f'https://api.telegram.org/bot{bot_token}/forwardMessage', data=forward_message)
+                        # send user identity
+                        requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+
+            # if message was actually a document
+            elif 'document' in json_message['message']:
+                # set message type
+                message_type = 'document'
+                # get document info
+                document_details = json_message['message']['document']
+            
 
 
 
@@ -95,13 +107,6 @@ while(True):
             text = json_message['edited_message']['text']
 
 
-        # if message was actually a document
-        elif 'document' in json_message:
-            # set message type
-            message_type = 'document'
-            # get document info
-            document_details = json_message['document']
-
         # if there is not any key of the specified ones
         else:
             # mark message as read
@@ -109,14 +114,19 @@ while(True):
             # do nothing and just reloop it
             continue
 
-
+        print(message_type)
         # command is parsed only if message is sent from an admin
         if chat_id in admins_chat_id_list:
-            # create a new thread for processing command
-            x = threading.Thread(target=run_command, args=(text,chat_id))
-            # start the thread
-            x.start()
-
+            if message_type == 'text':
+                # create a new thread for processing command
+                x = threading.Thread(target=run_command, args=(text,chat_id))
+                # start the thread
+                x.start()
+            elif message_type == 'document':
+                # create a new thread for processing document
+                x = threading.Thread(target=check_document, args=(document_details,chat_id))
+                # start the thread
+                x.start()
 
         # increase message offset. sending next request with this offset is like marking message as read.
         message_offset = json_message['update_id'] + 1
