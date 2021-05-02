@@ -2,7 +2,7 @@ import subprocess
 import special_commands
 import requests
 import json
-from config import bot_token, users_directories, main_path
+from config import bot_token, users_directories, main_path, admins_chat_id_list
 import re
 import os
 
@@ -15,7 +15,6 @@ def escape_ansi(line):
     
 # process commands
 def run_command(command, chat_id):
-
 
     # text = updates.json()['result'][0]['message']['text']
 
@@ -81,12 +80,15 @@ def run_command(command, chat_id):
             "text":f'ERROR: {error_text}',
         }
 
-        # send the message
-        requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+
     # if there was any other Error
     except:
         # do not make a fuss!
         pass
+
+    # send the message
+    requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+
 
 def check_document(document, chat_id):
 
