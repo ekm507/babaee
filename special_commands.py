@@ -120,6 +120,26 @@ def __change_user_directory__(command, chat_id):
     # if it was susccessful, return current path
     return users_directories[chat_id]
 
+# receive file sent to chat and store it on the server
+def __receive_file__(command, chat_id):
+    
+    # we have to get (file_name, file_path, chat_id) from where it was stored TODO
+    
+    # send a request and get the file itself.
+    fileData = requests.get(f'https://api.telegram.org/file/bot{bot_token}/{file_path}')
+
+    # if there are args
+    if len(command) > 0:
+        # change file name into what was provided.
+        file_name = command
+
+    # change dir to where user was in (for relative file names)
+    os.chdir(users_directories[chat_id])
+    # open a new file for writing into and write file content into it
+    open(file_name, 'wb').write(fileData.content)
+    # return file name and path as a success message
+    return os.path.realpath(users_directories[chat_id] + '/' + file_name)
+
 
 # a dict of special commands mapped to corresponding function
 special_commands = {
@@ -129,6 +149,6 @@ special_commands = {
     '/help': __print_help_message__,
     '/ps': __show_process_list__,
     'cd': __change_user_directory__,
-
+    '/receive': __receive_file__,
 }
 
