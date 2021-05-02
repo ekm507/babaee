@@ -2,6 +2,7 @@ import subprocess
 import requests
 from config import bot_token, users_directories, main_path, help_file_name
 import os
+import pickle
 
 # run command using sh shell
 def __run_sh__(command : str, chat_id):
@@ -125,6 +126,15 @@ def __receive_file__(command, chat_id):
     
     # we have to get (file_name, file_path, chat_id) from where it was stored TODO
     
+
+    try:
+        users_file_paths = pickle.load(open('users_file_paths.pickle', 'rb'))
+    except FileNotFoundError:
+        return 'there was an error. send a file (or resend it)'
+    
+    file_name, file_path = users_file_paths[chat_id]
+
+
     # send a request and get the file itself.
     fileData = requests.get(f'https://api.telegram.org/file/bot{bot_token}/{file_path}')
 
