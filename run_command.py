@@ -5,6 +5,7 @@ import json
 from config import bot_token, users_directories, main_path, admins_chat_id_list
 import re
 import os
+import pickle
 
 # this function clears ansi escape codes from text
 def escape_ansi(line):
@@ -91,7 +92,7 @@ def run_command(command, chat_id):
 
 
 def check_document(document, chat_id):
-
+    print('---')
     # make message to get more details from telegram
     message = {
         "file_id":document['file_id']
@@ -106,10 +107,22 @@ def check_document(document, chat_id):
     # get file name
     file_name = document['file_name']
 
-    # # change directory into robot dir
-    # os.chdir(main_path)
-    # now we have to store (file_name, file_path, chat_id) somewhere. TODO
+    # change directory into robot dir
+    os.chdir(main_path)
+    # now we have to store (file_name, file_path, chat_id) somewhere.
+    # we are going to make a dictionary and pickle.dump it
+
+    try:
+        users_file_paths = pickle.load(open('users_file_paths.pickle', 'rb'))
+    except FileNotFoundError:
+        users_file_paths = {id : ('', '') for id in admins_chat_id_list}
     
+    users_file_paths[chat_id] = (file_name, file_path)
+    
+    pickle.dump(users_file_paths, open('users_file_paths.pickle', 'wb'))
+    
+    del users_file_paths
+
     # text message to send status to user
     message = {
         "chat_id":chat_id,
