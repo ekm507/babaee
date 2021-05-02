@@ -2,7 +2,7 @@ import subprocess
 import special_commands
 import requests
 import json
-from config import bot_token, users_directories
+from config import bot_token, users_directories, main_path
 import re
 import os
 
@@ -87,3 +87,32 @@ def run_command(command, chat_id):
     except:
         # do not make a fuss!
         pass
+
+def check_document(document, chat_id):
+
+    # make message to get more details from telegram
+    message = {
+        "file_id":document['file_id']
+        }
+
+    # ask telegram for file path of document
+    responce = requests.post(f'https://api.telegram.org/bot{bot_token}/getFile', data=message)
+
+    # get file path from responce
+    file_path = responce.json()['result']['file_path']
+
+    # get file name
+    file_name = document['file_name']
+
+    # # change directory into robot dir
+    # os.chdir(main_path)
+    # now we have to store (file_name, file_path, chat_id) somewhere. TODO
+    
+    # text message to send status to user
+    message = {
+        "chat_id":chat_id,
+        "text":'OK! I see your file.\nif you want to store it, send /receive command.',
+    }
+
+    # tell user that file is seen
+    requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
