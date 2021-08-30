@@ -16,3 +16,5 @@ python3 babaee.py
 - show a list of running subprocesses with a killing ability. (temporary solution: linux ps command)
 - make an interface for other apps to let them communicatie with admin via telegram.
 - make better logs. (how should they be?)
+- run commands in with user access
+- option to reply to messages when answering. for avoiding out of order outputs
