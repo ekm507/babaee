@@ -12,6 +12,27 @@ sleep_time = 0.1
 message_limit = 1
 message_offset = 0
 
+
+# make union of two lists as sets
+def union(list1, list2):
+    return list(set(list1) | set(list2))
+
+# send a hello message!
+for forward_chat_id in union(admins_chat_id_list, forward_chat_id_list):
+
+    # send user identity
+    message = {
+        # chat id where message should be forwarded to
+        "chat_id":forward_chat_id,
+        # a text telling user identity
+
+        "text": bot_start_message,
+    }
+
+    # send user identity
+    requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+
+
 # main bot loop
 while(True):
 
