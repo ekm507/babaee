@@ -1,6 +1,6 @@
 import subprocess
 import requests
-from config import bot_token, users_directories, main_path, help_file_name, chatid_users
+from config import bot_token, users_directories, main_path, help_file_name, chatid_users, sudoers_chatid
 import os
 import pickle
 
@@ -159,6 +159,19 @@ def __receive_file__(command, chat_id):
     return os.path.realpath(users_directories[chat_id] + '/' + file_name)
 
 
+def __run_as_sudo_shell__(command, chat_id):
+    if chat_id in sudoers_chatid:
+
+        # run command using sh shell
+        text = subprocess.check_output(command, shell=True)
+    
+    else:
+        text = 'you are not a sudoer!'
+
+    return text
+
+
+
 # a dict of special commands mapped to corresponding function
 special_commands = {
     '/sh':__run_sh__,
@@ -168,5 +181,6 @@ special_commands = {
     '/ps': __show_process_list__,
     'cd': __change_user_directory__,
     '/receive': __receive_file__,
+    '/sudo':__run_as_sudo_shell__,
 }
 
