@@ -36,3 +36,7 @@ bot_start_message = 'bot started working! 🐑'
 chatid_users = {
      # integer:string
 }
+
+sudoers_chatid = [
+     #integer
+]
