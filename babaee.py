@@ -1,5 +1,5 @@
 # import bot configurations
-from config import bot_token, admins_chat_id_list, forward_chat_id_list
+from config import bot_token, admins_chat_id_list, forward_chat_id_list, bot_start_message
 from run_command import run_command, check_document
 import requests
 from pprint import pprint
@@ -68,6 +68,7 @@ while(True):
 
             # get chat id of the message
             chat_id = json_message['message']['chat']['id']
+            message_id = json_message['message']['message_id']
 
             if 'text' in json_message['message']:
 
@@ -140,7 +141,7 @@ while(True):
         if chat_id in admins_chat_id_list:
             if message_type == 'text':
                 # create a new thread for processing command
-                x = threading.Thread(target=run_command, args=(text,chat_id))
+                x = threading.Thread(target=run_command, args=(text,chat_id, message_id))
                 # start the thread
                 x.start()
             elif message_type == 'document':

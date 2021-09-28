@@ -15,7 +15,7 @@ def escape_ansi(line):
     return ansi_escape.sub('', line)
     
 # process commands
-def run_command(command, chat_id):
+def run_command(command, chat_id, message_id):
 
     # text = updates.json()['result'][0]['message']['text']
 
