@@ -55,6 +55,7 @@ def run_command(command, chat_id, message_id):
             "text":'```\n' + printable_out_text + '\n```',
             # set parse mode to markdown so that text can be in monospace
             "parse_mode":"MarkdownV2",
+            "reply_to_message_id":message_id,
         }
 
     # if there was a permission error while running the command
