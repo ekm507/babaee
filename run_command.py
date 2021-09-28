@@ -19,6 +19,8 @@ def run_command(command, chat_id, message_id):
 
     # text = updates.json()['result'][0]['message']['text']
 
+    username = chatid_users[chat_id]
+
     # change shell directory to users directory
     os.chdir(users_directories[chat_id])
 
@@ -35,7 +37,7 @@ def run_command(command, chat_id, message_id):
         # if command is not one of the specials
         else:
             # run the command using subprocess and get output
-            out = subprocess.check_output(command.split(' '))
+            out = subprocess.check_output(['runuser', '-u', username] + command.split(' '))
 
         # remove ansi escape codes from command output
         # if out is str
