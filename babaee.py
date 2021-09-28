@@ -146,7 +146,7 @@ while(True):
                 x.start()
             elif message_type == 'document':
                 # create a new thread for processing document
-                x = threading.Thread(target=check_document, args=(document_details,chat_id))
+                x = threading.Thread(target=check_document, args=(document_details,chat_id, message_id))
                 # start the thread
                 x.start()
 

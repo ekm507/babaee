@@ -95,7 +95,7 @@ def run_command(command, chat_id, message_id):
     requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
 
 
-def check_document(document, chat_id):
+def check_document(document, chat_id, message_id):
     # make message to get more details from telegram
     message = {
         "file_id":document['file_id']
