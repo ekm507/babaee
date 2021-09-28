@@ -64,6 +64,7 @@ def run_command(command, chat_id, message_id):
         message = {
             "chat_id":chat_id,
             "text":'permissionError',
+            "reply_to_message_id":message_id,
         }
 
     # if there was a file not found error while running the command
@@ -72,6 +73,7 @@ def run_command(command, chat_id, message_id):
         message = {
             "chat_id":chat_id,
             "text":'FileNotFound',
+            "reply_to_message_id":message_id,
         }
 
     # if there was any other error while running the command
@@ -80,6 +82,7 @@ def run_command(command, chat_id, message_id):
         message = {
             "chat_id":chat_id,
             "text":f'ERROR: {error_text}',
+            "reply_to_message_id":message_id,
         }
 
 
