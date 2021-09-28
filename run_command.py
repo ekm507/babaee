@@ -2,7 +2,7 @@ import subprocess
 import special_commands
 import requests
 import json
-from config import bot_token, users_directories, main_path, admins_chat_id_list
+from config import bot_token, users_directories, main_path, admins_chat_id_list, chatid_users
 import re
 import os
 import pickle
