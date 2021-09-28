@@ -132,6 +132,7 @@ def check_document(document, chat_id, message_id):
     message = {
         "chat_id":chat_id,
         "text":'OK! I see your file.\nif you want to store it, send /receive command.',
+        "reply_to_message_id":message_id,
     }
 
     # tell user that file is seen
