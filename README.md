@@ -36,6 +36,14 @@ thus, the way you run the robot, you need to configure it differently.
 ### configure for non-root user
 
 
+edit `config.py` file.
+
+1. edit `robot_token`
+
+     in `config.py` file set robot token
+    ```python
+    robot_token = "token you get from botfather"
+    ```
 
 ### configure for root user
 
