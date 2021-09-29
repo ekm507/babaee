@@ -175,3 +175,4 @@ however there are some special commands you can use.
 - make an interface for other apps to let them communicatie with admin via telegram.
 - make better logs. (how should they be?)
 - write a better help file
+- make a cli for configuration
