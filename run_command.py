@@ -2,7 +2,7 @@ import subprocess
 import special_commands
 import requests
 import json
-from config import bot_token, users_directories, main_path, admins_chat_id_list, chatid_users, user_running_bot
+from config import bot_token, users_directories, main_path, admins_chat_id_list, chatid_users, user_running_bot, reply_to_messages
 import re
 import os
 import pickle
@@ -65,8 +65,9 @@ def run_command(command, chat_id, message_id):
             "text":'```\n' + printable_out_text + '\n```',
             # set parse mode to markdown so that text can be in monospace
             "parse_mode":"MarkdownV2",
-            "reply_to_message_id":message_id,
         }
+        if reply_to_messages == True:
+            message.update({"reply_to_message_id":message_id,})
 
     # if there was a permission error while running the command
     except PermissionError:
@@ -74,8 +75,10 @@ def run_command(command, chat_id, message_id):
         message = {
             "chat_id":chat_id,
             "text":'permissionError',
-            "reply_to_message_id":message_id,
         }
+        if reply_to_messages == True:
+            message.update({"reply_to_message_id":message_id,})
+
 
     # if there was a file not found error while running the command
     except FileNotFoundError:
@@ -83,8 +86,9 @@ def run_command(command, chat_id, message_id):
         message = {
             "chat_id":chat_id,
             "text":'FileNotFound',
-            "reply_to_message_id":message_id,
         }
+        if reply_to_messages == True:
+            message.update({"reply_to_message_id":message_id,})
 
     # if there was any other error while running the command
     except subprocess.CalledProcessError as error_text:
@@ -92,8 +96,9 @@ def run_command(command, chat_id, message_id):
         message = {
             "chat_id":chat_id,
             "text":f'ERROR: {error_text}',
-            "reply_to_message_id":message_id,
         }
+        if reply_to_messages == True:
+            message.update({"reply_to_message_id":message_id,})
 
 
     # if there was any other Error
@@ -140,8 +145,9 @@ def check_document(document, chat_id, message_id):
     message = {
         "chat_id":chat_id,
         "text":'OK! I see your file.\nif you want to store it, send /receive command.',
-        "reply_to_message_id":message_id,
     }
+    if reply_to_messages == True:
+        message.update({"reply_to_message_id":message_id,})
 
     # tell user that file is seen
     requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)

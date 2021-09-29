@@ -54,3 +54,5 @@ else:
 sudoers_chatid = [
      #integer
 ]
+
+reply_to_messages = True
