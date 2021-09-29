@@ -90,6 +90,20 @@ edit `config.py` file.
     ]
     ```
 
+5. edit `forward_chat_id_list`
+
+    it is possible to send a log from users commands to a telegram user, for instance root user's telegram.
+
+    for example:
+
+    ```python
+    # a list of chat id. bot will forward all incoming messages to these users.
+    forward_chat_id_list = [
+        12121212,
+        # integers
+    ]
+    ```
+
 ### running the robot
 
 run the bot using python3
