@@ -77,6 +77,18 @@ edit `config.py` file.
     }
     ```
 
+4. edit `sudoers_chatid` list
+
+    it is possible to give a user root access.
+
+    for example if you want to let user 12121212 be able ro run commands as root:"
+
+    ```python
+    sudoers_chatid = [
+        12121212,
+        #integer
+    ]
+    ```
 
 ### running the robot
 
