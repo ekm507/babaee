@@ -2,7 +2,7 @@ import subprocess
 import special_commands
 import requests
 import json
-from config import bot_token, users_directories, main_path, admins_chat_id_list, chatid_users
+from config import bot_token, users_directories, main_path, admins_chat_id_list, chatid_users, user_running_bot
 import re
 import os
 import pickle
@@ -19,7 +19,6 @@ def run_command(command, chat_id, message_id):
 
     # text = updates.json()['result'][0]['message']['text']
 
-    username = chatid_users[chat_id]
 
     # change shell directory to users directory
     os.chdir(users_directories[chat_id])
@@ -36,8 +35,17 @@ def run_command(command, chat_id, message_id):
             out = special_commands.special_commands[special_keyword](cmd, chat_id)
         # if command is not one of the specials
         else:
-            # run the command using subprocess and get output
-            out = subprocess.check_output(['runuser', '-u', username] + command.split(' '))
+
+            if user_running_bot == 'root':
+                
+                username = chatid_users[chat_id]
+
+                # run the command using subprocess and get output
+                out = subprocess.check_output(['runuser', '-u', username] + command.split(' '))
+            else:
+                # run the command using subprocess and get output
+                out = subprocess.check_output(command.split(' '))
+
 
         # remove ansi escape codes from command output
         # if out is str

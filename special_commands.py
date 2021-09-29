@@ -1,6 +1,6 @@
 import subprocess
 import requests
-from config import bot_token, users_directories, main_path, help_file_name, chatid_users, sudoers_chatid
+from config import bot_token, users_directories, main_path, help_file_name, chatid_users, sudoers_chatid, user_running_bot
 import os
 import pickle
 
@@ -8,9 +8,14 @@ import pickle
 # run command using sh shell
 def __run_sh__(command : str, chat_id):
 
-    username = chatid_users[chat_id]
 
-    command_to_run = f'runuser -u {username} ' + command
+    if user_running_bot == 'root':
+
+        username = chatid_users[chat_id]
+        command_to_run = f'runuser -u {username} ' + command
+    else:
+        command_to_run = command
+
     print(command_to_run)
     # run command using sh shell
     text = subprocess.check_output(command_to_run, shell=True)
