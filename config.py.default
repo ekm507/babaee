@@ -1,4 +1,5 @@
 import os
+import getpass
 
 # paste bot token here
 bot_token = "" # "something:something"
@@ -27,6 +28,7 @@ help_file_name = 'help.md'
 # start message for bot. this message will be sent to forward 
 bot_start_message = 'bot started working! 🐑'
 
+user_running_bot = getpass.getuser()
 
 
 if user_running_bot == 'root':
