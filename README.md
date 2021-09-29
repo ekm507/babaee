@@ -39,17 +39,25 @@ thus, the way you run the robot, you need to configure it differently.
 
 ### configure for root user
 1. in `config.py` file set robot token
-```python
-robot_token = "token you get from botfather"
-```
+    ```python
+    robot_token = "token you get from botfather"
+    ```
 
 2. and your `chat_id` (you can add several ones)
-```python
 
-```
-2. run the bot:
+    as an example:
+    ```python
+    # chat id of admins
+    admins_chat_id_list = [
+        12121212,
+        13131313,
+    ]
+
+    ```
 
 ### running the robot
+
+run the bot using python3
 
 ``` bash
 python3 babaee.py
