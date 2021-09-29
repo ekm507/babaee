@@ -151,6 +151,22 @@ run the bot using python3
 python3 babaee.py
 ```
 
+## usage
+
+to use the bot, simply type linux commands in it.  
+however there are some special commands you can use.
+
+### special commands
+
+- /help : robot help
+- /sh : run command in shell
+- /sudo : run command as root in shell
+- /send : send a file from server to telegram
+- /receive : receive a file from telegram into server
+- /edit : edit a file
+- /ps : list of running processes
+
+
 ## TODO
 
 - show a list of running subprocesses with a killing ability. (temporary solution: linux ps command)
