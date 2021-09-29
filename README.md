@@ -45,6 +45,22 @@ edit `config.py` file.
     robot_token = "token you get from botfather"
     ```
 
+2. edit `admins_chat_id_list`.
+
+    add your `chat_id` (you can add several ones)
+
+    as an example:
+    ```python
+    # chat id of admins
+    admins_chat_id_list = [
+        12121212,
+        13131313,
+        # integer
+    ]
+
+    ```
+
+
 ### configure for root user
 
 edit `config.py` file.
