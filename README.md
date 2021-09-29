@@ -173,3 +173,4 @@ however there are some special commands you can use.
 - make an interface for other apps to let them communicatie with admin via telegram.
 - make better logs. (how should they be?)
 - option to reply to messages when answering. for avoiding out of order outputs
+- write a better help file
