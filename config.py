@@ -27,15 +27,21 @@ help_file_name = 'README.md'
 # start message for bot. this message will be sent to forward 
 bot_start_message = 'bot started working! 🐑'
 
-# each chat id is assigned to a user in linux.
-# this is a dictionary.
-# each element is like this:
-# chat_id:'username'
-# for example:
-# 12121212:'root',
-chatid_users = {
-     # integer:string
-}
+
+
+if user_running_bot == 'root':
+
+     # each chat id is assigned to a user in linux.
+     # this is a dictionary.
+     # each element is like this:
+     # chat_id:'username'
+     # for example:
+     # 12121212:'root',
+     chatid_users = {
+          # integer:string
+     }
+else:
+     chatid_users = {chat_id:user_running_bot for chat_id in admins_chat_id_list}
 
 sudoers_chatid = [
      #integer
