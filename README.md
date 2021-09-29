@@ -63,6 +63,21 @@ edit `config.py` file.
 
     ```
 
+3. edit `chatd_users` dict.
+
+    each chat_id must be assigned to a user on your machine.
+
+    as an example:
+
+    ```python
+    chatid_users = {
+        12121212:'erfan',
+        13131313:'funny-user'
+        # integer:string
+    }
+    ```
+
+
 ### running the robot
 
 run the bot using python3
