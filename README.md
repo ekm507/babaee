@@ -1,7 +1,7 @@
 # babaee
 a telegram bot for remote controlling a server
 
-## how to use
+## how to set up a _babaee_ on your server
 
 this is a pretty straightforward guide for setting up your own *babaee* robot.
 
