@@ -9,16 +9,15 @@ import pickle
 def __run_sh__(command : str, chat_id):
 
 
+    with open('user_shell_command_to_run.sh', 'w') as cmdfile:
+        cmdfile.write('#!/usr/bin/bash\n')
+        cmdfile.write(command)
+                    
+        os.chmod('user_shell_command_to_run.sh', 0o777)
+
     if user_running_bot == 'root':
 
         username = chatid_users[chat_id]
-
-        with open('user_shell_command_to_run.sh', 'w') as cmdfile:
-            cmdfile.write('#!/usr/bin/bash\n')
-            cmdfile.write(command)
-            
-        
-        os.chmod('user_shell_command_to_run.sh', 0o777)
 
         command_to_run = f'runuser -u {username} ./user_shell_command_to_run.sh'
         # command_to_run = f'runuser -u {username} ' + command
