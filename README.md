@@ -14,7 +14,7 @@ this is a pretty straightforward guide for setting up your own *babaee* robot.
 
 ## more details on how to set up _babaee_
 
-### prerequirements
+### prerequisits
 
 
 1. create a telegram bot and note the bot token. ([here is how to do it](https://core.telegram.org/bots#3-how-do-i-create-a-bot))
