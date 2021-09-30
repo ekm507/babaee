@@ -6,6 +6,7 @@ from config import bot_token, users_directories, main_path, admins_chat_id_list,
 import re
 import os
 import pickle
+import re
 
 # this function clears ansi escape codes from text
 def escape_ansi(line):
@@ -26,13 +27,15 @@ def run_command(command, chat_id, message_id):
     # try processing message and sending output
     try:
         # pick up first word of the message
-        special_keyword = command.split(' ')[0]
+        first_keyword = re.split(r' |\t|\n', command, 1)[0]
         # if first word of message is one of the special commands:
-        if special_keyword in special_commands.special_commands:
+        if first_keyword in special_commands.special_commands:
             # remove first word from the command text
-            cmd = ' '.join(command.split(' ')[1:])
+            cmd = re.split(r' |\t|\n', command, 1)[1]
+            
             # run special function for the command and get output
-            out = special_commands.special_commands[special_keyword](cmd, chat_id)
+            out = special_commands.special_commands[first_keyword](cmd, chat_id)
+
         # if command is not one of the specials
         else:
 
