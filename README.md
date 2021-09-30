@@ -7,6 +7,13 @@ it is the system-admins's assistant telegram bot!
 
 this is a pretty straightforward guide for setting up your own *babaee* robot.
 
+1. clone this repository.
+2. copy `config.py.default` into `config.py`.
+3. configure `config.py`.
+3. run robot with command `python3 babaee.py`.
+
+## more details on how to set up _babaee_
+
 ### prerequirements
 
 
