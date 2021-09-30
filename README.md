@@ -38,7 +38,7 @@ there are two ways to run this robot.
 
 when run by non-root user, commands will be run as your user.
 
-when run by root user, you can define users for each person interacting with robot. you will also give users root access for running commands.
+when run by root user, you can define users for each person interacting with robot. you may also give users root access for running commands.
 
 thus, the way you run the robot, you need to configure it differently.
 
