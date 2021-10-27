@@ -20,7 +20,7 @@ def check_file_permission(filename:str, chat_id) -> list:
     user_access_mode = []
 
     # if user is the user running the bot, then the os will return good answer
-    if username == user_running_bot:
+    if username == user_running_bot or (username in sudoers_chatid and user_running_bot == 'root'):
         if os.access(filename, os.R_OK):
             user_access_mode.append('read')
         if os.access(filename, os.W_OK):
