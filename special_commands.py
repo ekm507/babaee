@@ -28,6 +28,32 @@ def check_file_permission(filename:str, username:str) -> list:
         
         # job is done!
         return user_access_mode
+    
+    # but if username is not the same as robot user:
+    
+    # get file uid, gid, mode
+    file_user_id = os.stat(filename).st_uid
+    file_access_mode_code = os.stat(filename).st_mode
+    file_access_mode = stat.filemode(file_access_mode_code)
+    user_uid = pwd.getpwnam(username).pw_uid
+
+    # support for group access is not implemented yet.
+    if user_uid == file_user_id:
+        if file_access_mode[1] == 'r':
+            user_access_mode.append('read')
+        if file_access_mode[2] == 'w':
+            user_access_mode.append('write')
+        if file_access_mode[3] == 'x':
+            user_access_mode.append('exec')
+    else:
+        if file_access_mode[7] == 'r':
+            user_access_mode.append('read')
+        if file_access_mode[8] == 'w':
+            user_access_mode.append('write')
+        if file_access_mode[9] == 'x':
+            user_access_mode.append('exec')
+
+    return user_access_mode
 
 
 # run command using sh shell
