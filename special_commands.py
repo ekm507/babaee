@@ -12,7 +12,9 @@ import os, pwd, stat
     check mod for the uid or gid or others.
 """
 
-def check_file_permission(filename:str, username:str) -> list:
+def check_file_permission(filename:str, chat_id) -> list:
+
+    username = chatid_users[chat_id]
 
     # user_access_mode is a subset of ['read', 'write', 'exec']
     user_access_mode = []
