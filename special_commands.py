@@ -1,8 +1,33 @@
+from collections import UserDict
 import subprocess
 import requests
 from config import bot_token, users_directories, main_path, help_file_name, chatid_users, sudoers_chatid, user_running_bot
-import os
 import pickle
+import os, pwd, stat
+
+"""
+    what we need:
+    check uid, gid, mode for a file
+    check if a uid is in a gid
+    check mod for the uid or gid or others.
+"""
+
+def check_file_permission(filename:str, username:str) -> list:
+
+    # user_access_mode is a subset of ['read', 'write', 'exec']
+    user_access_mode = []
+
+    # if user is the user running the bot, then the os will return good answer
+    if username == user_running_bot:
+        if os.access(filename, os.R_OK):
+            user_access_mode.append('read')
+        if os.access(filename, os.W_OK):
+            user_access_mode.append('write')
+        if os.access(filename, os.X_OK):
+            user_access_mode.append('exec')
+        
+        # job is done!
+        return user_access_mode
 
 
 # run command using sh shell
@@ -45,7 +70,7 @@ def __edit_file__(command : str, chat_id):
     # get filename. first word in the message should be the filename
     for arg in args:
         if arg not in ['-a']:
-            fileName = arg
+            filename = arg
             break
 
     # if we remove first line from the message, remaining will be text body of file
@@ -58,7 +83,7 @@ def __edit_file__(command : str, chat_id):
     # try to open a file and write text into
     try:
         # open the file
-        with open(fileName, write_mode) as fileToEdit:
+        with open(filename, write_mode) as fileToEdit:
             # write text into file
             fileToEdit.write(text)
         # return a proper success message.
