@@ -101,6 +101,9 @@ def __edit_file__(command : str, chat_id):
             filename = arg
             break
 
+    if 'write' not in check_file_permission(filename, chat_id):
+        return 'you do not have permission'
+
     # if we remove first line from the message, remaining will be text body of file
     text = command[len(command.split('\n')[0])+1:]
 
