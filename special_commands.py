@@ -131,6 +131,10 @@ def __send_file__(command:str, chat_id):
     # get filename
     filename = command
 
+    # check user permission
+    if 'read' not in check_file_permission(filename, chat_id):
+        return 'you do not have permission'
+
     # data part of request
     message = {
         "chat_id":chat_id,
