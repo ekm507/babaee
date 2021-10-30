@@ -174,7 +174,7 @@ however there are some special commands you can use.
 - /receive : receive a file from telegram into server
 - /edit : edit a file
 - /ps : list of running processes
-
+- /exec : execute a python command in robot
 
 ## TODO
 
