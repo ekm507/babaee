@@ -183,3 +183,4 @@ however there are some special commands you can use.
 - make better logs. (how should they be?)
 - write a better help file
 - make a cli for configuration
+- split telegram interface from the main code into a different file. this way robot can be used for other platforms, also testing can be easier.
