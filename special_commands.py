@@ -63,17 +63,20 @@ def __run_sh__(command : str, chat_id):
 
     os.chdir(main_path)
 
-    with open('user_shell_command_to_run.sh', 'w') as cmdfile:
+    username = chatid_users[chat_id]
+    sh_filename = f'user_{username}_shell_command_to_run.sh'
+
+    with open(sh_filename, 'w') as cmdfile:
         cmdfile.write('#!/usr/bin/bash\n')
         cmdfile.write(command)
                     
-        os.chmod('user_shell_command_to_run.sh', 0o777)
+        os.chmod(sh_filename, 0o777)
 
     if user_running_bot == 'root':
 
         username = chatid_users[chat_id]
 
-        command_to_run = f'runuser -u {username} ./user_shell_command_to_run.sh'
+        command_to_run = f'runuser -u {username} {sh_filename}'
         # command_to_run = f'runuser -u {username} ' + command
     else:
         command_to_run = command
