@@ -52,7 +52,7 @@ def check_file_permission(filename:str, chat_id) -> list:
     file_access_mode = stat.filemode(file_access_mode_code)
     user_uid = pwd.getpwnam(username).pw_uid
 
-    # support for group access is not implemented yet.
+    # support for group access is not implemented yet. TODO
     if user_uid == file_user_id:
         if file_access_mode[1] == 'r':
             user_access_mode.append('read')
