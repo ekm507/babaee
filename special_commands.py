@@ -61,6 +61,7 @@ def check_file_permission(filename:str, chat_id) -> list:
 # run command using sh shell
 def __run_sh__(command : str, chat_id):
 
+    os.chdir(main_path)
 
     with open('user_shell_command_to_run.sh', 'w') as cmdfile:
         cmdfile.write('#!/usr/bin/bash\n')
@@ -80,6 +81,8 @@ def __run_sh__(command : str, chat_id):
     print(command_to_run)
     # run command using sh shell
     text = subprocess.check_output(command_to_run, shell=True)
+    os.chdir(users_directories[chat_id])
+
     return text
 
 
