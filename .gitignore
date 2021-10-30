@@ -1,2 +1,4 @@
 config.py
 __pycache__
+user_*_shell_command_to_run.sh
+users_file_paths.pickle
