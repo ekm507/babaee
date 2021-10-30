@@ -4,6 +4,19 @@ import requests
 from config import bot_token, users_directories, main_path, help_file_name, chatid_users, sudoers_chatid, user_running_bot
 import pickle
 import os, pwd, stat
+from io import StringIO 
+import sys
+
+class Capturing(list):
+    def __enter__(self):
+        self._stdout = sys.stdout
+        sys.stdout = self._stringio = StringIO()
+        return self
+    def __exit__(self, *args):
+        self.extend(self._stringio.getvalue().splitlines())
+        del self._stringio    # free up some memory
+        sys.stdout = self._stdout
+
 
 """
     what we need:
@@ -252,8 +265,9 @@ def __run_as_sudo_shell__(command, chat_id):
 def __execute_python_code__(command, chat_id):
     username = chatid_users[chat_id]
     if username == user_running_bot or (user_running_bot == 'sudo' and chat_id in sudoers_chatid):
-        exec(command)
-        return 'executed.'
+        with Capturing() as output:
+            exec(command)
+        return repr(output)
     else:
         return 'you are not allowed to use this command!'
 
