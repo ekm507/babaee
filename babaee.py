@@ -38,6 +38,7 @@ while(True):
 
     # this delay is for preventing high CPU load
     sleep(sleep_time)
+    json_message = dict()
 
     # try getting messages and processing them
     try:
@@ -156,7 +157,9 @@ while(True):
     # usually means message is in a type that is not supported in babaee (yet).
     except KeyError:
         # just mark message as read
-        message_offset = json_message['update_id'] + 1
+
+        if 'update_id' in json_message :
+            message_offset = json_message['update_id'] + 1
 
     # if there was a connection error
     except requests.exceptions.ConnectionError:
