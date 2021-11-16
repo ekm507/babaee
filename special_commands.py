@@ -77,7 +77,7 @@ def __run_sh__(command : str, chat_id):
     os.chdir(main_path)
 
     username = chatid_users[chat_id]
-    sh_filename = f'user_{username}_shell_command_to_run.sh'
+    sh_filename = f'./user_{username}_shell_command_to_run.sh'
 
     with open(sh_filename, 'w') as cmdfile:
         cmdfile.write('#!/usr/bin/bash\n')
