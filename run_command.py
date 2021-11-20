@@ -44,7 +44,8 @@ def run_command(command, chat_id, message_id):
                 username = chatid_users[chat_id]
 
                 # run the command using subprocess and get output
-                out = subprocess.check_output(['runuser', '-u', username] + command.split(' '))
+                command_to_run = ['runuser' , username,'-c', command]
+                out = subprocess.check_output(command_to_run)
             else:
                 # run the command using subprocess and get output
                 out = subprocess.check_output(command.split(' '))
