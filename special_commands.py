@@ -172,7 +172,6 @@ def __send_file__(command:str, chat_id):
 def __print_help_message__(command, chat_id):
 
     # go to directory where help file is stored
-    os.chdir(main_path)
 
     with open(help_file_name) as help_file:
         help_text = help_file.read()
