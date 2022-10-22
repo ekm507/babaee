@@ -31,8 +31,13 @@ def run_command(command, chat_id, message_id):
         first_keyword = re.split(r' |\t|\n', command, 1)[0]
         # if first word of message is one of the special commands:
         if first_keyword in special_commands.special_commands:
+
             # remove first word from the command text
-            cmd = re.split(r' |\t|\n', command, 1)[1]
+            try:
+                cmd = re.split(r' |\t|\n', command, 1)[1]
+            # if command exists of only one chunk and there is no arguments
+            except IndexError:
+                cmd = ''
             
             # run special function for the command and get output
             out = special_commands.special_commands[first_keyword](cmd, chat_id)
