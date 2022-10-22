@@ -20,6 +20,7 @@ def run_command(command, chat_id, message_id):
 
     # text = updates.json()['result'][0]['message']['text']
 
+    message = {}
 
     # change shell directory to users directory
     os.chdir(users_directories[chat_id])
