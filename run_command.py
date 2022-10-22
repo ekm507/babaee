@@ -112,7 +112,8 @@ def run_command(command, chat_id, message_id):
         pass
 
     # send the message
-    requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+    if len(message.keys()) > 0:
+        requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
 
 
 def check_document(document, chat_id, message_id):
