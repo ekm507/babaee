@@ -182,8 +182,8 @@ def __print_help_message__(command, chat_id):
         "text":help_text,
     }
 
-    requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
-    return ''
+    # requests.post(f'https://api.telegram.org/bot{bot_token}/sendMessage', data=message)
+    return help_text
 
 
 # todo. this is just a temporary solution!!!
