@@ -1,3 +1,7 @@
+# babaee bot version 1.0
+
+type in any unix command to run.
+
 # special commands:
 
 /sh : run command in shell
