@@ -7,6 +7,7 @@ import re
 import os
 import pickle
 import re
+from variables import pidlist
 
 # this function clears ansi escape codes from text
 def escape_ansi(line):
@@ -55,6 +56,8 @@ def run_command(command, chat_id, message_id):
             else:
                 # run the command using subprocess and get output
                 proc = subprocess.Popen(command.split(' '), stdout=subprocess.PIPE)
+                pid = proc.pid
+                pidlist.append((pid, command))
                 out = proc.communicate()[0]
 
 
