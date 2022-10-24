@@ -56,6 +56,7 @@ def run_command(command, chat_id, message_id):
                 pid = proc.pid
                 pidlist.append((pid, command))
                 out = proc.communicate()[0]
+                pidlist.remove((pid, command))
             else:
                 # run the command using subprocess and get output
                 proc = subprocess.Popen(command.split(' '), stdout=subprocess.PIPE)
