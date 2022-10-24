@@ -59,6 +59,7 @@ def run_command(command, chat_id, message_id):
                 pid = proc.pid
                 pidlist.append((pid, command))
                 out = proc.communicate()[0]
+                pidlist.remove((pid, command))
 
 
         # remove ansi escape codes from command output
