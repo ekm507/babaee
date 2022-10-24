@@ -76,7 +76,10 @@ def run_command(command, chat_id, message_id):
             # first encode it into str, then remove ansi escape characters
             printable_out_text = escape_ansi(str(out, encoding='utf-8'))
 
-        text = '```\n' + printable_out_text + '\n```'
+        if len(printable_out_text) > 0:
+            text = '```\n' + printable_out_text + '\n```'
+        else:
+            text = '*done*'
 
         # make a message to send to telegram
         message = {
