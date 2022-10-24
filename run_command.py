@@ -52,7 +52,8 @@ def run_command(command, chat_id, message_id):
 
                 # run the command using subprocess and get output
                 command_to_run = ['runuser' , username,'-c', command]
-                out = subprocess.check_output(command_to_run)
+                proc = subprocess.Popen(command_to_run, stdout=subprocess.PIPE)
+                out = proc.communicate()[0]
             else:
                 # run the command using subprocess and get output
                 proc = subprocess.Popen(command.split(' '), stdout=subprocess.PIPE)
