@@ -54,7 +54,8 @@ def run_command(command, chat_id, message_id):
                 out = subprocess.check_output(command_to_run)
             else:
                 # run the command using subprocess and get output
-                out = subprocess.check_output(command.split(' '))
+                proc = subprocess.Popen(command.split(' '), stdout=subprocess.PIPE)
+                out = proc.communicate()[0]
 
 
         # remove ansi escape codes from command output
