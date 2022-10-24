@@ -190,6 +190,7 @@ def __print_help_message__(command, chat_id):
 # todo. this is just a temporary solution!!!
 def __show_process_list__(command, chat_id):
     text = subprocess.check_output('ps')
+    text = str(pidlist)
     return text
 
 
