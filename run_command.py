@@ -76,12 +76,14 @@ def run_command(command, chat_id, message_id):
             # first encode it into str, then remove ansi escape characters
             printable_out_text = escape_ansi(str(out, encoding='utf-8'))
 
+        text = '```\n' + printable_out_text + '\n```'
+
         # make a message to send to telegram
         message = {
             # chat id should be id of the one who had requested
             "chat_id":chat_id,
             # text is command output in monospace format
-            "text":'```\n' + printable_out_text + '\n```',
+            "text": text,
             # set parse mode to markdown so that text can be in monospace
             "parse_mode":"MarkdownV2",
         }
