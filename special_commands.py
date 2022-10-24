@@ -6,6 +6,7 @@ import pickle
 import os, pwd, stat
 from io import StringIO 
 import sys
+from variables import pidlist
 
 class Capturing(list):
     def __enter__(self):
