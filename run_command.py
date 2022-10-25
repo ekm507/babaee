@@ -53,16 +53,16 @@ def run_command(command, chat_id, message_id):
                 # run the command using subprocess and get output
                 proc = subprocess.Popen(command.split(' '), stdout=subprocess.PIPE)
                 pid = proc.pid
-                pidlist.append((pid, command, proc))
+                pidlist.append((pid, command, proc, chat_id))
                 out = proc.communicate()[0]
-                pidlist.remove((pid, command, proc))
+                pidlist.remove((pid, command, proc, chat_id))
             else:
                 # run the command using subprocess and get output
                 proc = subprocess.Popen(command.split(' '), stdout=subprocess.PIPE)
                 pid = proc.pid
-                pidlist.append((pid, command, proc))
+                pidlist.append((pid, command, proc, chat_id))
                 out = proc.communicate()[0]
-                pidlist.remove((pid, command, proc))
+                pidlist.remove((pid, command, proc, chat_id))
 
 
         # remove ansi escape codes from command output
