@@ -138,7 +138,8 @@ while(True):
             # do nothing and just reloop it
             continue
 
-        print(message_type)
+        if logging_level >= 2:
+            print(message_type)
         # command is parsed only if message is sent from an admin
         if chat_id in admins_chat_id_list:
             if message_type == 'text':
