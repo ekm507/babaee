@@ -198,6 +198,11 @@ def __show_process_list__(command, chat_id):
         text = '🥕 there is no process running'
     return text
 
+def __kill_process_index__(command, chat_id):
+    process_index = int(command)
+    proc = pidlist[process_index][2]
+    proc.kill()
+    return 'killed'
 
 # cd to a directory
 def __change_user_directory__(command, chat_id):
