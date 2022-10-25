@@ -292,6 +292,7 @@ special_commands = {
     '/send':__send_file__,
     '/help': __print_help_message__,
     '/ps': __show_process_list__,
+    '/kill': __kill_process_index__,
     'cd': __change_user_directory__,
     '/receive': __receive_file__,
     '/sudo':__run_as_sudo_shell__,
