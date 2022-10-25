@@ -194,6 +194,8 @@ def __show_process_list__(command, chat_id):
         print(i, process_info)
         text += str(i) + ' 🥕 ' + str(process_info[0]) + ' ' + process_info[1] + '\n'
     # text = '🥕 ' + '\n🥕 '.join([str(pid[0]) + ' ' + pid[1] for pid in pidlist])
+    if len(text) < 1:
+        text = '🥕 there is no process running'
     return text
 
 
