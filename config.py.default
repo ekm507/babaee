@@ -56,3 +56,4 @@ sudoers_chatid = [
 ]
 
 reply_to_messages = True
+logging_level = 2
