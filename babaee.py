@@ -1,5 +1,5 @@
 # import bot configurations
-from config import bot_token, admins_chat_id_list, forward_chat_id_list, bot_start_message
+from config import bot_token, admins_chat_id_list, forward_chat_id_list, bot_start_message, logging_level
 from run_command import run_command, check_document
 import requests
 from pprint import pprint
@@ -58,7 +58,8 @@ while(True):
 
         # jsonified message to process
         json_message = updates.json()['result'][0]
-        pprint(json_message)
+        if logging_level >= 2:
+            pprint(json_message)
 
         # type of message will be stored here. we will later use it for processing
         message_type = ''
