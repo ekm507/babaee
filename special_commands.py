@@ -200,10 +200,13 @@ def __show_process_list__(command, chat_id):
 
 def __kill_process_index__(command, chat_id):
     process_index = int(command)
+    pid = pidlist[process_index][0]
+    process_title = pidlist[process_index][1]
     proc = pidlist[process_index][2]
     proc.kill()
     pidlist.remove(pidlist[process_index])
-    return 'killed'
+    text = f'killed 🥕 {pid} ({process_title})'
+    return text
 
 # cd to a directory
 def __change_user_directory__(command, chat_id):
