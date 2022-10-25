@@ -63,6 +63,7 @@ while(True):
 
         # type of message will be stored here. we will later use it for processing
         message_type = ''
+        text = ''
 
         # if there is a new "message"
         if 'message' in json_message:
