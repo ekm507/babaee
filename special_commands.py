@@ -202,6 +202,7 @@ def __kill_process_index__(command, chat_id):
     process_index = int(command)
     proc = pidlist[process_index][2]
     proc.kill()
+    pidlist.remove(pidlist[process_index])
     return 'killed'
 
 # cd to a directory
