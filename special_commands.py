@@ -95,7 +95,8 @@ def __run_sh__(command : str, chat_id):
     else:
         command_to_run = command
 
-    print(command_to_run)
+    if logging_level >= 2:
+        print(command_to_run)
     # run command using sh shell
     text = subprocess.check_output(command_to_run, shell=True)
     os.chdir(users_directories[chat_id])
