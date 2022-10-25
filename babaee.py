@@ -166,4 +166,5 @@ while(True):
     # if there was a connection error
     except requests.exceptions.ConnectionError:
         # print error text but do not kill the bot.
-        print('connection error')
+        if logging_level >= 1:
+            print('connection error')
