@@ -7,6 +7,8 @@ config_text = open('config.py.default').read()
 config_file = open('config2.py', 'w')
 
 # get token
+print("create a bot using Botfather (https://t.me/BotFather)")
+print("after creation you will get a token.")
 bot_token = input("paste bot token here:")
 config_text = config_text.replace('bot_token = ""', f'bot_token = "{bot_token}"')
 
