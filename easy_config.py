@@ -3,13 +3,17 @@
 import requests
 import random
 from time import sleep
-import re
+import os
+import shutil
 
 # read default config file
 config_text = open('config.py.default').read()
 config_file = open('config2.py', 'w')
 
-# get token
+files_in_dir = os.listdir()
+if 'config.py' in files_in_dir:
+    shutil.copyfile('config.py', 'config.py.bak')
+
 print("create a bot using Botfather (https://t.me/BotFather)")
 print("after creation you will get a token.")
 bot_token = input("paste bot token here:")
