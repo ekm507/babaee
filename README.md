@@ -9,7 +9,7 @@ this is a pretty straightforward guide for setting up your own *babaee* robot.
 
 1. clone this repository.
 2. copy `config.py.default` into `config.py`.
-3. configure `config.py`.
+3. configure `config.py`. you can do it manually or you can use [easy config](#configure-using-easy-config)
 3. run robot with command `python3 babaee.py`.
 
 ## more details on how to set up _babaee_
@@ -30,6 +30,10 @@ git clone 'https://github.com/ekm507/babaee.git'
 cp config.py.default config.py
 ```
 
+### configure using easy config
+
+to configure the bot, you can use `easy_config.py` script. just run it and it will tell you what to do.
+
 ### edit the `config.py` file
 
 there are two ways to run this robot.  
@@ -41,6 +45,9 @@ when run by non-root user, commands will be run as your user.
 when run by root user, you can define users for each person interacting with robot. you may also give users root access for running commands.
 
 thus, the way you run the robot, you need to configure it differently.
+
+detailed config
+---
 
 ### configure for non-root user
 
