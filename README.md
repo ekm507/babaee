@@ -1,5 +1,6 @@
 # babaee
 a telegram bot for remote controlling a server
+![image](https://user-images.githubusercontent.com/13185969/223531827-54a8f4e3-dd97-46de-b65a-871782c4a0a6.png)
 
 it is the system-admins's assistant telegram bot!
 
