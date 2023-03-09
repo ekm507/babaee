@@ -286,6 +286,12 @@ def __execute_python_code__(command, chat_id):
     else:
         return 'you are not allowed to use this command!'
 
+# restart babaee bot
+def __restart_babaee__(command, chat_id):
+    username = chatid_users[chat_id]
+    if username == user_running_bot or (user_running_bot == 'sudo' and chat_id in sudoers_chatid):
+        os.execv(f'{main_path}/babaee.py', sys.argv)
+
 # a dict of special commands mapped to corresponding function
 special_commands = {
     '/sh':__run_sh__,
@@ -298,5 +304,6 @@ special_commands = {
     '/receive': __receive_file__,
     '/sudo':__run_as_sudo_shell__,
     '/exec': __execute_python_code__,
+    '/restart': __restart_babaee__,
 }
 
