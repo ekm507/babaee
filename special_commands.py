@@ -203,12 +203,14 @@ def __show_process_list__(command, chat_id):
 def __kill_process_index__(command, chat_id):
     try:
         process_index = int(command)
+        pid = pidlist[process_index][0]
+        process_title = pidlist[process_index][1]
+        proc = pidlist[process_index][2]
+        process_user = chatid_users[pidlist[process_index][0]]
     except:
         text = '✖️🥕 there is no process associated with this number!'
-    pid = pidlist[process_index][0]
-    process_title = pidlist[process_index][1]
-    proc = pidlist[process_index][2]
-    process_user = chatid_users[pidlist[process_index][0]]
+        return text
+    
     if process_user == chatid_users[chat_id] or chat_id in sudoers_chatid:
         proc.kill()
         pidlist.remove(pidlist[process_index])
