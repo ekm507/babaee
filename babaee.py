@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # import bot configurations
 from config import bot_token, admins_chat_id_list, forward_chat_id_list, bot_start_message, logging_level
 from run_command import run_command, check_document
