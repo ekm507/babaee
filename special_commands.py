@@ -201,7 +201,10 @@ def __show_process_list__(command, chat_id):
     return text
 
 def __kill_process_index__(command, chat_id):
-    process_index = int(command)
+    try:
+        process_index = int(command)
+    except:
+        text = '✖️🥕 there is no process associated with this number!'
     pid = pidlist[process_index][0]
     process_title = pidlist[process_index][1]
     proc = pidlist[process_index][2]
