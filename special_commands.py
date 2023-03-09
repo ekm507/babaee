@@ -290,7 +290,7 @@ def __execute_python_code__(command, chat_id):
 def __restart_babaee__(command, chat_id):
     username = chatid_users[chat_id]
     if username == user_running_bot or (user_running_bot == 'sudo' and chat_id in sudoers_chatid):
-        os.execv(f'{main_path}/babaee.py', sys.argv)
+        os.execv(f'{main_path}/babaee.py', ['1'])
 
 # a dict of special commands mapped to corresponding function
 special_commands = {
