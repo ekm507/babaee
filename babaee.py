@@ -17,10 +17,11 @@ message_offset = 0
 if len(argv) > 1:
     numberof_messages_to_ignore = int(argv[1])
     message_offset = numberof_messages_to_ignore
-    updates = requests.post(f'https://api.telegram.org/bot{bot_token}/getupdates?offset={message_offset}&limit={message_limit}')
     # print(numberof_messages_to_ignore, flush=True)
-    # for i in range(numberof_messages_to_ignore):
-    #     json_message = updates.json()['result'][0]
+    for i in range(numberof_messages_to_ignore):
+        updates = requests.post(f'https://api.telegram.org/bot{bot_token}/getupdates?offset={message_offset}&limit={message_limit}')
+        json_message = updates.json()['result'][0]
+        message_offset += 1
 
 # make union of two lists as sets
 def union(list1, list2):
