@@ -266,6 +266,7 @@ def __receive_file__(command, chat_id):
     return os.path.realpath(users_directories[chat_id] + '/' + file_name)
 
 
+# run a command in shell with sudo access
 def __run_as_sudo_shell__(command, chat_id):
     if chat_id in sudoers_chatid:
 
