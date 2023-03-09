@@ -277,6 +277,7 @@ def __run_as_sudo_shell__(command, chat_id):
 
     return text
 
+# execute a python code and see output (DANGER!)
 def __execute_python_code__(command, chat_id):
     username = chatid_users[chat_id]
     if username == user_running_bot or (user_running_bot == 'sudo' and chat_id in sudoers_chatid):
