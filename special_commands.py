@@ -205,9 +205,13 @@ def __kill_process_index__(command, chat_id):
     pid = pidlist[process_index][0]
     process_title = pidlist[process_index][1]
     proc = pidlist[process_index][2]
-    proc.kill()
-    pidlist.remove(pidlist[process_index])
-    text = f'killed 🥕 {pid} ({process_title})'
+    process_user = chatid_users[pidlist[process_index][0]]
+    if process_user == chatid_users[chat_id] or chat_id in sudoers_chatid:
+        proc.kill()
+        pidlist.remove(pidlist[process_index])
+        text = f'killed 🥕 {pid} ({process_title})'
+    else:
+        text = '✖️🥕 you do not have permission to kill this process!'
     return text
 
 # cd to a directory
