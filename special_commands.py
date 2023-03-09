@@ -193,7 +193,8 @@ def __print_help_message__(command, chat_id):
 def __show_process_list__(command, chat_id):
     text = ''
     for i, process_info in enumerate(pidlist):
-        text += str(i) + ' 🥕 ' + str(process_info[0]) + ' ' + process_info[1] + '\n'
+        if process_info[3] == chat_id or chat_id in sudoers_chatid:
+            text += str(i) + ' 🥕 ' + str(process_info[0]) + ' ' + process_info[1] + '\n'
     # text = '🥕 ' + '\n🥕 '.join([str(pid[0]) + ' ' + pid[1] for pid in pidlist])
     if len(text) < 1:
         text = '🥕 there is no process running'
