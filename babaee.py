@@ -6,6 +6,7 @@ import requests
 from pprint import pprint
 from time import sleep
 import threading
+from sys import argv
 
 # time to sleep between requests
 sleep_time = 0.1
@@ -13,6 +14,13 @@ sleep_time = 0.1
 message_limit = 1
 message_offset = 0
 
+if len(argv) > 1:
+    numberof_messages_to_ignore = int(argv[1])
+    message_offset = numberof_messages_to_ignore
+    updates = requests.post(f'https://api.telegram.org/bot{bot_token}/getupdates?offset={message_offset}&limit={message_limit}')
+    # print(numberof_messages_to_ignore, flush=True)
+    # for i in range(numberof_messages_to_ignore):
+    #     json_message = updates.json()['result'][0]
 
 # make union of two lists as sets
 def union(list1, list2):
