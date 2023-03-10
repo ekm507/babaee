@@ -27,6 +27,8 @@ class Capturing(list):
     check mod for the uid or gid or others.
 """
 
+# check if a user is permitted to access a file.
+# this function is used only when running Babaee as superuser
 def check_file_permission(filename:str, chat_id) -> list:
 
     username = chatid_users[chat_id]
