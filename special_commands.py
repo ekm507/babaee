@@ -200,6 +200,7 @@ def __show_process_list__(command, chat_id):
         text = '🥕 there is no process running'
     return text
 
+# kill a process by it's index
 def __kill_process_index__(command, chat_id):
     try:
         process_index = int(command)
